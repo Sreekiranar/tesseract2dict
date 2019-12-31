@@ -33,7 +33,7 @@ class TessToDict:
 			directory=MAKETREEDIR()
 			directory.makedir('tmp')
 			cv2.imwrite('tmp/hocr.jpg',image)
-			if outpath not in ['.','',' ']:
+			if outpath not in ['.','']:
 				directory.makedir(outpath)
 			###call tesseract to get hocr out
 			pytesseract.pytesseract.run_tesseract(
