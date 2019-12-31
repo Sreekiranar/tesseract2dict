@@ -9,7 +9,7 @@ import pandas as pd
 class TessToDict:
 	def __init__(self):
 		pass
-	def tess2dict(self,image,outname,outpath='',config=''):
+	def tess2dict(self,image,outname,outpath='.',config=''):
 		"""Function to call tesseract in hocr mode and get word level dataframe
 
 		Args:
