@@ -6,10 +6,10 @@ with open('README.md','r') as f:
 
 setup(name='tesseract2dict',
       version='1.0',
-      description='enter the package description',
+      description='solution to extract the text from image and get wordlevel output as dataframe',
       long_description=long_description,
       long_description_content_type="text/markdown",
-      url='enter the url',
+      url='https://github.com/Sreekiranar/tesseract2dict.git'
       authors='Sreekiran A R, Anil Prasad M N',
       author_email='sreekiranar@gmail.com, anilprasadmn@gmail.com',
       license='MIT',
