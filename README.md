@@ -52,7 +52,7 @@ word_dict=td.tess2dict(inputImage,'out','outfolder')
 [Stackoverflow](https://stackoverflow.com/users/9605907/sreekiran)
 
 * **Anil Prasad M N** - *Project Manager, AI Labs, Bridgei2i Analytics Solutions* -
- [Github](https://github.com/anilprasadmn) ,
+ [Github](https://github.com/anilprasadmn)
 
 
 ## License

@@ -15,7 +15,7 @@ class TessToDict:
 		Args:
 			image (np.ndarray): input image
 			outname (str): output name
-			outpath (str): Path to save the .hocr output
+			outpath (str): directory to save the .hocr output
 			config (str): tesseract configuration params
 		Returns:
 			dict: word_dict containing coordinates and content of each word
@@ -33,6 +33,7 @@ class TessToDict:
 		directory.makedir('tmp')
 		cv2.imwrite('tmp/hocr.jpg',image)
 
+		directory.makedir(outpath)
 		###call tesseract to get hocr out
 		pytesseract.pytesseract.run_tesseract(
 		'tmp/hocr.jpg', '{}'.format(os.path.join(outpath,outname)),
