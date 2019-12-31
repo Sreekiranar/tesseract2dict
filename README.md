@@ -38,7 +38,7 @@ dataframe at word level is returned.
 eg:
 ```python
 import cv2
-from tesseract2dict import Tess2Dict
+from tesseract2dict import TessToDict
 td=TessToDict()
 inputImage=cv2.imread('path/to/image.jpg')
 word_dict=td.tess2dict(inputImage,'out','outfolder')

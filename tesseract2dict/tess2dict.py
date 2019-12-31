@@ -6,8 +6,7 @@ from MakeTreeDir import MAKETREEDIR
 import pytesseract
 import pandas as pd
 
-class TessTo
-Dict:
+class TessToDict:
 	def __init__(self):
 		pass
 	def tess2dict(self,image,outname,outpath='',config=''):
@@ -23,7 +22,7 @@ Dict:
 
 		Examples
 			>>> import cv2
-			>>> from tesseract2dict import Tess2Dict
+			>>> from tesseract2dict import TessToDict
 			>>> td=TessToDict()
 			>>> inputImage=cv2.imread('path/to/image.jpg')
 			>>> word_dict=td.tess2dict(inputImage,'out','outfolder')
