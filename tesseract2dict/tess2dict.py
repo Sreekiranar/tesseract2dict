@@ -87,3 +87,62 @@ class TessToDict:
 			print(e)
 			word_dict=pd.DataFrame(columns=['x','y','w','h','text','conf'])
 		return word_dict
+
+	def word2text(self,word_dict,coords):
+		"""function to return the text with proper formatting from the word dictionary for a given region(x,y,w,h)
+
+		Args:
+			word_dict (dict):Output obtained from tess2dict (dataframe with each word and its coordinates)
+			coords (tuple):(x,y,w,h) The rectangle from which the text has to be extracted.
+
+		Returns:
+			str: The extracted text with proper formatting
+		Examples
+			>>> import cv2
+			>>> from tesseract2dict import TessToDict
+			>>> td=TessToDict()
+			>>> inputImage=cv2.imread('path/to/image.jpg')
+			>>> word_dict=td.tess2dict(inputImage,'out','outfolder')
+			>>> plain_text=td.dict2text(word_dict,(0,0,inputImage.shape[1],inputImage.shape[0])
+
+		"""
+		string=[]
+		delim=[]
+		x,y,w,h=coords
+		a0=b0=-1
+		### if two consequtive words are horizontal, they are concatenated with
+		### space, else with new line
+
+		try:
+			for i,s in word_dict.iterrows():
+				delta=10
+				### getting coordinates
+				a1,b1,c1,d1=s['x'],s['y'],s['w'],s['h']
+				cx=int(a1+(c1/2))
+				cy=int(b1+(d1/2))
+				if a0!=-1:
+					### checking for region of overlap for the two boxes in Y axis.
+					areaL=min(c0,c1)*d0
+					areaROI=min(c0,c1)*(max((b0+d0),(b1+d1))-min(b0,b1))
+					if areaROI <= areaL*2:
+						delim.append(' ')
+					else:
+						delim.append('\n')
+				else:
+					delim.append('')
+
+				### getting all text inside given block
+				if (cx>=x and cx<=(x+w) and cy>=y and cy<=(y+h)):
+					string.append(s['text'])
+					### for comparing with the next word
+					a0,b0,c0,d0=a1,b1,c1,d1
+
+			strings=''
+			### final string concatination
+			for char,dl in zip(string,delim):
+				strings=strings+str(dl)+str(char)
+
+		except Exception as e:
+			print(e)
+			strings=''
+		return strings
