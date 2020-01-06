@@ -5,7 +5,7 @@ with open('README.md','r') as f:
 
 
 setup(name='tesseract2dict',
-      version='1.0',
+      version='1.1',
       description='solution to extract the text from image and get wordlevel output as dataframe',
       long_description=long_description,
       long_description_content_type="text/markdown",
