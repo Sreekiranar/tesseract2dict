@@ -1,7 +1,8 @@
 # TESSERACT2DICT
+This class contains two main funtions:
 
-Input an image and get the extracted text as a dataframe which gives the content, coordinates (x,y,w,h) and confidence of each word. Essentially, it is a wrapper on pytesseract to output a dataframe.
-
+1. **tess2dict**: Input an image and get the extracted text as a dataframe which gives the content, coordinates (x,y,w,h) and confidence of each word. Essentially, it is a wrapper on pytesseract to output a dataframe.
+2. **word2text**: Once you obtain the dataframe, you can pass it through this function along with a bounding box to get the text inside the given box with proper formatting.
 ### Prerequisites
 
 - beautifulsoup4
@@ -34,14 +35,18 @@ Input an image and get the extracted text as a dataframe which gives the content
 ### Usage
 A sample usage of our solution is shown below. Input an image as numpy.ndarray and the extracted
 dataframe at word level is returned.
-
+You can also get the text as plain of a given bounding box with proper formatting using the second function
 eg:
 ```python
 import cv2
 from tesseract2dict import TessToDict
 td=TessToDict()
 inputImage=cv2.imread('path/to/image.jpg')
+### function 1
 word_dict=td.tess2dict(inputImage,'out','outfolder')
+
+### function 2
+text_plain=td.word2text(word_dict,(0,0,inputImage.shape[1],inputImage.shape[0]))
 
 ```
 
