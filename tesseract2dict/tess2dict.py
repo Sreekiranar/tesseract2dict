@@ -107,7 +107,7 @@ class TessToDict:
 
 		"""
 		string=[]
-		delim=[]
+		delim=['']
 		x,y,w,h=coords
 		a0=b0=-1
 		### if two consequtive words are horizontal, they are concatenated with
@@ -115,24 +115,21 @@ class TessToDict:
 
 		try:
 			for i,s in word_dict.iterrows():
-				delta=10
 				### getting coordinates
 				a1,b1,c1,d1=s['x'],s['y'],s['w'],s['h']
 				cx=int(a1+(c1/2))
 				cy=int(b1+(d1/2))
-				if a0!=-1:
-					### checking for region of overlap for the two boxes in Y axis.
-					areaL=min(c0,c1)*d0
-					areaROI=min(c0,c1)*(max((b0+d0),(b1+d1))-min(b0,b1))
-					if areaROI <= areaL*2:
-						delim.append(' ')
-					else:
-						delim.append('\n')
-				else:
-					delim.append('')
 
 				### getting all text inside given block
 				if (cx>=x and cx<=(x+w) and cy>=y and cy<=(y+h)):
+					if a0!=-1:
+						### checking for region of overlap for the two boxes in Y axis.
+						areaL=min(c0,c1)*d0
+						areaROI=min(c0,c1)*(max((b0+d0),(b1+d1))-min(b0,b1))
+						if areaROI <= areaL*2:
+							delim.append(' ')
+						else:
+							delim.append('\n')
 					string.append(s['text'])
 					### for comparing with the next word
 					a0,b0,c0,d0=a1,b1,c1,d1
