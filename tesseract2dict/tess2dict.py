@@ -32,15 +32,15 @@ class TessToDict:
 			### temp file creation for tesseract call
 			directory=MAKETREEDIR()
 			directory.makedir('tmp')
-			cv2.imwrite('tmp/hocr.jpg',image)
+			cv2.imwrite(os.path.join('tmp','hocr.jpg'),image)
 			if outpath not in ['.','']:
 				directory.makedir(outpath)
 			###call tesseract to get hocr out
 			pytesseract.pytesseract.run_tesseract(
-			'tmp/hocr.jpg', '{}'.format(os.path.join(outpath,outname)),
+			os.path.join('tmp','hocr.jpg'), '{}'.format(os.path.join(outpath,outname)),
 			extension='.html', lang='eng', config="hocr {}".format(config))
 			### removing temp files
-			os.remove("tmp/hocr.jpg")
+			os.remove(os.path.join("tmp","hocr.jpg"))
 			os.rmdir('tmp')
 
 			### hocr to word_dict
